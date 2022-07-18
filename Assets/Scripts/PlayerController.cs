@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
         rot.z = 0;
         transform.eulerAngles = new Vector3(0, rot.y, 0);
         cameraTransform.eulerAngles = rot;
+        //Debug.Log($"Player={transform.position}");
     }
 
 

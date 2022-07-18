@@ -6,6 +6,8 @@ public class BulletScript : MonoBehaviour
 {
     private string tagEnemy = "Enemy";
     private string tagPlayer = "Player";
+    private string tagVC = "VisibleCollider";
+    
     public float Speed = 40f;
 
     void OnTriggerEnter(Collider other)
@@ -14,7 +16,7 @@ public class BulletScript : MonoBehaviour
         {
             Destroy(other.gameObject);
         }
-        if (!other.CompareTag(tagPlayer)) 
+        if (!other.CompareTag(tagPlayer) && !other.CompareTag(tagVC)) 
         {
             Destroy(gameObject);
         }
@@ -22,6 +24,7 @@ public class BulletScript : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("BulletScript");
         Destroy(gameObject, 5f);
         GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * Speed, ForceMode.Impulse);
     }
