@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,17 +12,23 @@ public class TurreleScript : MonoBehaviour
     private bool isVisiblePlayer = false;
     private Transform player;
     private float nextSpawnTime;
-    private float nextCheckTime;
     private string tagPlayer = "Player";
-    
-    void Start()
+
+    private void OnEnable()
     {
         player = FindObjectOfType<PlayerController>().transform;
+        StartCoroutine(CheckVisiblePlayer());
+    }
+
+
+    private void OnDisable()
+    {
+        StopCoroutine(CheckVisiblePlayer());
     }
 
     void Update()
     {
-        CheckVisiblePlayer();
+        //CheckVisiblePlayer();
         if (isVisiblePlayer)
         {
             LookAtPlayer();
@@ -45,15 +52,16 @@ public class TurreleScript : MonoBehaviour
         }
     }
 
-    void CheckVisiblePlayer() 
+    IEnumerator CheckVisiblePlayer() 
     {
-        if (Time.time > nextCheckTime)
+        while (enabled)
         {
             if (Physics.Raycast(new Ray(transform.position, player.position - transform.position), out RaycastHit hitInfo, 15f))
                 if (hitInfo.transform.CompareTag(tagPlayer)) isVisiblePlayer = true;
                 else isVisiblePlayer = false;
-            nextCheckTime = Time.time + spawnStep;
+            yield return new WaitForSeconds(spawnStep);
         }
+        yield return null;
     }
 
 }

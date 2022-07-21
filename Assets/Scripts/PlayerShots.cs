@@ -11,7 +11,8 @@ public class PlayerShots : MonoBehaviour
     private PlayerObjects playerObjects;
     private AudioSource audioSource;
     private Transform cameraTransform;
-
+    [SerializeField] private string inventarCheckNameGun;
+    [SerializeField] private string inventarCheckNameBomb;
 
     void Start()
     {
@@ -28,24 +29,26 @@ public class PlayerShots : MonoBehaviour
 
     private void Shot()
     {
-        if (playerObjects.IsGun && Input.GetMouseButtonDown(0))
+        if (Inventar.CheckInventar(inventarCheckNameGun) && Input.GetMouseButtonDown(0))
         {
             if (bulletPrefab != null)
             {
                 audioSource.PlayOneShot(bulletClip);
                 var bullet = Instantiate(bulletPrefab, new Vector3(transform.position.x, (transform.position.y + 0.5f), transform.position.z), cameraTransform.rotation);
+                bullet.GetComponent<BulletScript>().playerObjects = playerObjects;
             }
         }
     }
 
     private void Bomb()
     {
-        if (playerObjects.IsBomb && Input.GetMouseButtonDown(1))
+        if (Inventar.CheckInventar(inventarCheckNameBomb) && Input.GetMouseButtonDown(1))
         {
             if (bombPrefab != null)
             {
                 audioSource.PlayOneShot(bombClip);
-                var bullet = Instantiate(bombPrefab, new Vector3(transform.position.x + transform.forward.x, transform.position.y + 0.5f, transform.position.z + transform.forward.z), cameraTransform.rotation);
+                var bomb = Instantiate(bombPrefab, new Vector3(transform.position.x + transform.forward.x, transform.position.y + 0.5f, transform.position.z + transform.forward.z), cameraTransform.rotation);
+                bomb.GetComponent<BombScript>().playerObjects = playerObjects;
             }
         }
     }
