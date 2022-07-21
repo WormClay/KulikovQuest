@@ -5,13 +5,17 @@ using UnityEngine;
 public class DoorScript : MonoBehaviour
 {
     private string tagPlayer = "Player";
+    [SerializeField] private string inventarCheckName;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(tagPlayer))
         {
-            Debug.Log("Дверь");
-            if (other.GetComponent<PlayerObjects>().IsKey) Destroy(gameObject);
+            Debug.Log("Door");
+            if (Inventar.CheckInventar(inventarCheckName)) 
+            {
+                if (Inventar.DelFromInventar(inventarCheckName)) Destroy(gameObject);
+            }
         }
     }
 }

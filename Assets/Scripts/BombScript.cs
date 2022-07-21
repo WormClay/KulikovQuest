@@ -8,13 +8,17 @@ public class BombScript : MonoBehaviour
     private string tagPlayer = "Player";
     public float Speed = 3f;
     private AudioSource audioSource;
+    public PlayerObjects playerObjects { private get; set; }
+    private bool isDead = false;
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(tagEnemy))
+        if (other.CompareTag(tagEnemy) && !isDead)
         {
+            isDead = true;
             audioSource.Play();
             Destroy(other.gameObject);
+            playerObjects.AddFrag();
         }
         if (!other.CompareTag(tagPlayer))
         {
@@ -24,7 +28,6 @@ public class BombScript : MonoBehaviour
 
     void Start()
     {
-        //Destroy(gameObject, 5f);
         GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * Speed, ForceMode.Impulse);
         audioSource = transform.GetComponent<AudioSource>();
     }
