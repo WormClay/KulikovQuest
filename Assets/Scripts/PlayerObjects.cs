@@ -34,6 +34,7 @@ public class PlayerObjects : MonoBehaviour
             {
                 Time.timeScale = 0;
                 Debug.Log("Game Over");
+                text.text = "Game Over";
             }
         }
     }
@@ -69,5 +70,14 @@ public class PlayerObjects : MonoBehaviour
         enemysGO = GameObject.Find("Enemys");
         countEnemys = enemysGO.transform.childCount;
     }
-
+    //Check cicle while in update
+    /*private void Update()
+    {
+        int i = 0;
+        while (i < 100) 
+        {
+            i++;
+            Debug.Log("i="+i);
+        }
+    }*/
 }

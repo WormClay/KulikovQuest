@@ -12,7 +12,9 @@ public class FollowingEnemy : MonoBehaviour
     int m_CurrentWaypointIndex;
     private bool isVisiblePlayer = false;
     private string tagPlayer = "Player";
-    private float checkStep = 1f;  
+    private float checkStep = 1f;
+    [SerializeField] private int damage = 10;
+
     private void OnEnable()
     {
         player = FindObjectOfType<PlayerController>().transform;
@@ -59,4 +61,14 @@ public class FollowingEnemy : MonoBehaviour
         }
         yield return null;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.TryGetComponent(out PlayerObjects helth))
+        {
+            helth.Hit(damage);
+            //Debug.Log($"damage = {damage}");
+        }
+    }
+
 }
