@@ -7,6 +7,9 @@ public class BombScript : MonoBehaviour
     private string tagEnemy = "Enemy";
     private string tagPlayer = "Player";
     public float Speed = 3f;
+    private float radius = 3f;
+    private float explosionForce = 500f;
+    private float zForce = 0.2f;
     private AudioSource audioSource;
     public PlayerObjects playerObjects { private get; set; }
     private bool isDead = false;
@@ -17,6 +20,16 @@ public class BombScript : MonoBehaviour
         {
             isDead = true;
             audioSource.Play();
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius);
+            foreach (var hitCollider in hitColliders) 
+            {
+                
+                if (hitCollider.TryGetComponent<Rigidbody>(out Rigidbody hitRigidbody)) 
+                {
+                    Debug.Log("hitCollider " + hitCollider);
+                    hitRigidbody.AddForce((hitRigidbody.position - transform.position + new Vector3(0, zForce, 0)) * explosionForce);
+                }
+            }
             Destroy(other.gameObject);
             playerObjects.AddFrag();
         }
