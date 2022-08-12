@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 5178409209428719002}
   - component: {fileID: 7002587722750573620}
   - component: {fileID: 1712287493095130080}
+  - component: {fileID: 493046676549676230}
   m_Layer: 0
   m_Name: Med
   m_TagString: Untagged
@@ -108,7 +109,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6326564953606310676}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -9.055, y: 1.262, z: 6.202}
   m_LocalScale: {x: 1, y: 0.28, z: 1}
   m_ConstrainProportionsScale: 0
@@ -144,6 +145,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab636c9187783e348aeb457a1001060c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!111 &493046676549676230
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6326564953606310676}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 4b5d4372d8e57fa42ae3022898549a06, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 4b5d4372d8e57fa42ae3022898549a06, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 1
 --- !u!1 &7094136793086779603
 GameObject:
   m_ObjectHideFlags: 0
