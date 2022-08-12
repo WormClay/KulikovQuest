@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent (typeof(NavMeshAgent))] 
+[RequireComponent (typeof(NavMeshAgent))]
+[RequireComponent(typeof(Rigidbody))]
+//[RequireComponent(typeof(Animator))]
+
 public class FollowingEnemy : MonoBehaviour
 {
     private NavMeshAgent agent;
@@ -14,6 +17,9 @@ public class FollowingEnemy : MonoBehaviour
     private string tagPlayer = "Player";
     private float checkStep = 1f;
     [SerializeField] private int damage = 10;
+    private Animator animator;
+    [SerializeField] private float speed;
+    
 
     private void OnEnable()
     {
@@ -31,6 +37,8 @@ public class FollowingEnemy : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         agent.SetDestination(waypoints[0].position);
+        animator = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -39,6 +47,7 @@ public class FollowingEnemy : MonoBehaviour
         if (isVisiblePlayer) 
         {
             agent.SetDestination(player.position);
+            animator.SetBool("isAngry", true);
         }
         else
         {
@@ -47,6 +56,7 @@ public class FollowingEnemy : MonoBehaviour
                 m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
                 agent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
             }
+            animator.SetBool("isAngry", false);
         }
     }
 
