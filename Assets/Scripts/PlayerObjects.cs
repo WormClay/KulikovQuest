@@ -14,6 +14,7 @@ public class PlayerObjects : MonoBehaviour
     private int maxHelth = 100;
     private Text text;
     private Text text2;
+    private RectTransform helthImage;
     private GameObject enemysGO;
     [SerializeField] private int countEnemys = 2;
 
@@ -29,6 +30,7 @@ public class PlayerObjects : MonoBehaviour
         if (helth >= 0)
         {
             helth -= damage;
+            helthImage.sizeDelta = new Vector2(helth, helthImage.sizeDelta.y);
             text.text = $"Helth {helth}";
             if (helth <= 0) 
             {
@@ -45,6 +47,7 @@ public class PlayerObjects : MonoBehaviour
         helth += med;
         if (helth > maxHelth) helth = maxHelth;
         text.text = $"Helth {helth}";
+        helthImage.sizeDelta = new Vector2(helth, helthImage.sizeDelta.y);
     }
 
     public void AddFrag() 
@@ -68,6 +71,7 @@ public class PlayerObjects : MonoBehaviour
         text2 = GameObject.Find("TextUIFrags").GetComponent<Text>();
         text2.text = $"Frags {frags}";
         enemysGO = GameObject.Find("Enemys");
+        helthImage = GameObject.Find("Helth").GetComponent<RectTransform>();
         countEnemys = enemysGO.transform.childCount;
     }
     //Check cicle while in update
