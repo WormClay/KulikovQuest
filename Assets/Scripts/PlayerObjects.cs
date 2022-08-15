@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerObjects : MonoBehaviour
@@ -14,9 +15,11 @@ public class PlayerObjects : MonoBehaviour
     private int maxHelth = 100;
     private Text text;
     private Text text2;
+    private Text textWin;
     private RectTransform helthImage;
     private GameObject enemysGO;
     [SerializeField] private int countEnemys = 2;
+    [SerializeField] private string secondScene = "Scene2";
 
     public PlayerObjects() 
     {
@@ -60,6 +63,8 @@ public class PlayerObjects : MonoBehaviour
             text.text = "WIN";
             text2.text = "WIN";
             Time.timeScale = 0;
+            if (SceneManager.GetActiveScene().buildIndex == 0) SceneManager.LoadScene(secondScene);
+            else textWin.text = "WIN";
         }
     }
 
@@ -70,6 +75,7 @@ public class PlayerObjects : MonoBehaviour
         text.text = $"Helth {helth}";
         text2 = GameObject.Find("TextUIFrags").GetComponent<Text>();
         text2.text = $"Frags {frags}";
+        textWin = GameObject.Find("TextUIWin").GetComponent<Text>();
         enemysGO = GameObject.Find("Enemys");
         helthImage = GameObject.Find("Helth").GetComponent<RectTransform>();
         countEnemys = enemysGO.transform.childCount;

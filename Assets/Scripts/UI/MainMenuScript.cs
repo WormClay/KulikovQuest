@@ -34,6 +34,7 @@ namespace Quest.UI
         private void StartGame()
         {
             SceneManager.LoadScene(firstScene);
+            Inventar.ClearInventar();
         }
 
         void Start()

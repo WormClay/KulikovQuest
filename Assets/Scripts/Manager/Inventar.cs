@@ -39,4 +39,8 @@ public static class Inventar
         return all;
     }
 
+    public static void ClearInventar() 
+    {
+        inventar.Clear();
+    }
 }

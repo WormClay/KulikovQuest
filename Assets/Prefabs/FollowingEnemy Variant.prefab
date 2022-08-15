@@ -110,7 +110,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   damage: 10
+  speed: 0
 --- !u!195 &5728889348150777210
 NavMeshAgent:
   m_ObjectHideFlags: 0
