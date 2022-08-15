@@ -29,7 +29,7 @@ public class PlayerShots : MonoBehaviour
 
     private void Shot()
     {
-        if (Inventar.CheckInventar(inventarCheckNameGun) && Input.GetMouseButtonDown(0))
+        if (/*Inventar.CheckInventar(inventarCheckNameGun) && */Input.GetMouseButtonDown(0))
         {
             if (bulletPrefab != null)
             {
