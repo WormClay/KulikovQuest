@@ -13,6 +13,8 @@ public class BombScript : MonoBehaviour
     private AudioSource audioSource;
     public PlayerObjects playerObjects { private get; set; }
     private bool isDead = false;
+    private ParticleSystem system;
+    private MeshRenderer render;
 
     void OnTriggerEnter(Collider other)
     {
@@ -20,6 +22,7 @@ public class BombScript : MonoBehaviour
         {
             isDead = true;
             audioSource.Play();
+            system.Play();
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius);
             foreach (var hitCollider in hitColliders) 
             {
@@ -35,13 +38,21 @@ public class BombScript : MonoBehaviour
         }
         if (!other.CompareTag(tagPlayer))
         {
-            Destroy(gameObject);
+            Invoke("SelfDestroy", 0.3f);
+            render.enabled = false;
         }
     }
 
     void Start()
     {
         GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * Speed, ForceMode.Impulse);
-        audioSource = transform.GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
+        system = transform.GetComponentInChildren<ParticleSystem>();
+        render = GetComponent<MeshRenderer>(); 
+    }
+
+    void SelfDestroy() 
+    {
+        Destroy(gameObject);
     }
 }
