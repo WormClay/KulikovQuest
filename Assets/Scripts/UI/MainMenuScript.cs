@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -12,14 +13,25 @@ namespace Quest.UI
         private GameObject mainMenu;
         [SerializeField] private Button startGame;
         [SerializeField] private Button exitGame;
-
+        [SerializeField] private Slider slider;
+        //[SerializeField] private AudioMixer audioMixer;
         [SerializeField] private string firstScene = "MainScene";
 
         private void Awake()
         {
             startGame.onClick.AddListener(StartGame);
             exitGame.onClick.AddListener(Exit);
+            slider.value = 100;
+            AudioListener.volume = slider.value;
+            
+            slider.onValueChanged.AddListener(value => AudioListener.volume = value);
         }
+
+        /*public void SetVolume(float volume)
+        {
+            audioMixer.SetFloat("MasterVolume", volume);
+        }*/
+
 
         private void Exit()
         {
